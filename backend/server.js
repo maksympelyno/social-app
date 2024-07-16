@@ -5,6 +5,7 @@ import { v2 as cloudinary } from "cloudinary";
 
 import authRouter from "./routes/authRouter.js";
 import userRouter from "./routes/userRouter.js";
+import postRouter from "./routes/postRouter.js";
 
 import connectMongoDB from "./db/connectMongoDB.js";
 
@@ -25,6 +26,7 @@ app.use(cookieParser());
 
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
+app.use("/api/post", postRouter);
 
 app.listen(PORT, () => {
   console.log(`server is running on port ${PORT}`);
