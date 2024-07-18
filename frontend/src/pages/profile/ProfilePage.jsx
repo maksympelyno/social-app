@@ -75,7 +75,6 @@ const ProfilePage = () => {
   return (
     <>
       <div className="flex-[4_4_0]  border-r border-gray-700 min-h-screen ">
-        {/* HEADER */}
         {(isLoading || isRefetching) && <ProfileHeaderSkeleton />}
         {!isLoading && !isRefetching && !user && <p className="text-center text-lg mt-4">User not found</p>}
         <div className="flex flex-col">
@@ -89,7 +88,6 @@ const ProfilePage = () => {
                   <p className="font-bold text-lg">{user?.fullName}</p>
                 </div>
               </div>
-              {/* COVER IMG */}
               <div className="relative group/cover">
                 <img
                   src={coverImg || user?.coverImg || "/cover.png"}
