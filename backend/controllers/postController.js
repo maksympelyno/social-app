@@ -114,12 +114,24 @@ export const likePost = async (req, res) => {
       await User.updateOne({ _id: userId }, { $push: { likedPosts: postId } });
       await post.save();
 
-      const notification = new Notification({
-        from: userId,
-        to: post.user,
-        type: "like",
-      });
-      await notification.save();
+      if (userId.toString() !== post.user.toString()) {
+        const existingNotification = await Notification.findOne({
+          from: userId,
+          to: post.user,
+          type: "like",
+          post: postId,
+        });
+
+        if (!existingNotification) {
+          const notification = new Notification({
+            from: userId,
+            to: post.user,
+            type: "like",
+            post: postId,
+          });
+          await notification.save();
+        }
+      }
 
       const updatedLikes = post.likes;
       res.status(200).json(updatedLikes);
